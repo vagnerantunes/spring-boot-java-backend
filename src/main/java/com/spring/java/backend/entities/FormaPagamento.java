@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "tb_formaPagamento")
 public class FormaPagamento implements Serializable {
@@ -16,14 +19,27 @@ public class FormaPagamento implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter
+	@Setter
 	private Long FPG_ID;
 	
-	
+	@Getter
+	@Setter
 	private String FPG_TIPO_CONTA;
+	@Getter
+	@Setter
 	private String FPG_DESCRICAO;
+	@Getter
+	@Setter
 	private String FPG_TIPO;
+	@Getter
+	@Setter
 	private Integer FPG_QTDPARCELA;
+	@Getter
+	@Setter
 	private Double FPG_PORCENTAGEM;
+	@Getter
+	@Setter
 	private String FPG_FLAG;
 	
 	public FormaPagamento() {
@@ -39,6 +55,6 @@ public class FormaPagamento implements Serializable {
 		FPG_TIPO = fPG_TIPO;
 		FPG_QTDPARCELA = fPG_QTDPARCELA;
 		FPG_PORCENTAGEM = fPG_PORCENTAGEM;
-		FPG_FLAG = fPG_FLAG;
+		FPG_FLAG = fPG_FLAG;		
 	}
 }

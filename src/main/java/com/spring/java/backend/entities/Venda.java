@@ -42,11 +42,7 @@ public class Venda implements Serializable {
 
 	@Getter
 	@Setter
-	private Double VEN_JUROS;
-
-	private Integer VEN_STS_PAG;
-
-	private Integer VEN_STS_ORC;
+	private Double VEN_JUROS;	
 
 	public Venda() {
 	}
@@ -60,8 +56,6 @@ public class Venda implements Serializable {
 		VEN_VRPAGO = vEN_VRPAGO;
 		VEN_DESCONTO = vEN_DESCONTO;
 		VEN_JUROS = vEN_JUROS;
-		VEN_STS_PAG = vEN_STS_PAG;
-		VEN_STS_ORC = vEN_STS_ORC;
 	}
 
 }
