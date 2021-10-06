@@ -2,11 +2,17 @@ package com.spring.java.backend.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -42,8 +48,32 @@ public class Venda implements Serializable {
 
 	@Getter
 	@Setter
-	private Double VEN_JUROS;	
-
+	private Double VEN_JUROS;
+	
+	@Getter
+	@ManyToMany
+	@JoinTable(name = "tb_venda_parcela", joinColumns = @JoinColumn(name = "venda_id"),
+	inverseJoinColumns = @JoinColumn(name = "parcela_id"))
+	private Set<Parcela> parcelas = new HashSet<>();
+	
+	@Getter
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "VEN_CLI_ID")
+	private Cliente clientes;
+	
+	@Getter
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "VEN_FPG_ID")
+	private FormaPagamento pagamentos;
+	
+	@Getter
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "VEN_USU_ID")
+	private Usuario usuarios;
+	
 	public Venda() {
 	}
 
