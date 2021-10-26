@@ -13,7 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.spring.java.backend.enums.PagamentoStatus;
+import com.spring.java.backend.enums.VendaStatus;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -47,8 +51,36 @@ public class Venda implements Serializable {
 	private Double VEN_DESCONTO;
 
 	@Getter
-	@Setter
+	@Setter	
 	private Double VEN_JUROS;
+	
+	//-- inicio atributo e metodos VendaStatus --
+	private Integer VEN_STS_ORC;
+		
+	public VendaStatus getVEN_STS_ORC() {
+		return VendaStatus.valueOf(VEN_STS_ORC);		
+	}
+	
+	public void setVEN_STS_ORC(VendaStatus vEN_STS_ORC) {
+		if(vEN_STS_ORC != null) {
+			this.VEN_STS_ORC = vEN_STS_ORC.getCodigo();
+		}
+	}
+	//-- fim --
+	
+	//-- inicio atributo e metodos PagamentoStatus --
+	private Integer VEN_STS_PAG;
+	
+	public PagamentoStatus getVEN_STS_PAG() {
+		return PagamentoStatus.valueOf(VEN_STS_PAG);
+	}
+	
+	public void setVEN_STS_PAG(PagamentoStatus vEN_STS_PAG) {
+		if(vEN_STS_PAG != null) {
+			this.VEN_STS_PAG = vEN_STS_PAG.getCodigo();
+		}		
+	}
+	//-- fim --
 	
 	@Getter
 	@ManyToMany
@@ -74,11 +106,16 @@ public class Venda implements Serializable {
 	@JoinColumn(name = "VEN_USU_ID")
 	private Usuario usuarios;
 	
-	public Venda() {
+	@Getter
+	@OneToMany(mappedBy = "id.venda")
+	private Set<ItemVenda> itemVendas = new HashSet<>();
+	
+	public Venda() {		
 	}
 
 	public Venda(Long vEN_ID, Instant vEN_DATA, Double vEN_VRTOTAL, Double vEN_VRPAGO, Double vEN_DESCONTO,
-			Double vEN_JUROS, Integer vEN_STS_PAG, Integer vEN_STS_ORC) {
+			Double vEN_JUROS, VendaStatus vEN_STS_ORC, PagamentoStatus vEN_STS_PAG, Cliente clientes,
+			FormaPagamento pagamentos, Usuario usuarios) {
 		super();
 		VEN_ID = vEN_ID;
 		VEN_DATA = vEN_DATA;
@@ -86,6 +123,10 @@ public class Venda implements Serializable {
 		VEN_VRPAGO = vEN_VRPAGO;
 		VEN_DESCONTO = vEN_DESCONTO;
 		VEN_JUROS = vEN_JUROS;
-	}
-
+		setVEN_STS_ORC(vEN_STS_ORC);
+		setVEN_STS_PAG(vEN_STS_PAG);
+		this.clientes = clientes;
+		this.pagamentos = pagamentos;
+		this.usuarios = usuarios;
+	}	
 }

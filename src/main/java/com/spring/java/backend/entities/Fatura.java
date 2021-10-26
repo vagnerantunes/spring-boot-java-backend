@@ -2,12 +2,19 @@ package com.spring.java.backend.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.spring.java.backend.enums.PagamentoStatus;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -45,12 +52,25 @@ public class Fatura implements Serializable {
 	@Setter
 	private Integer FATA_ATRASO;
 	
+	@Getter
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "FAT_FPG_ID")
+	private FormaPagamento pagamentos;
+	
+	private Integer FAT_STS_PAG;
+	
+	@Getter
+	@OneToMany(mappedBy = "id.fatura")
+	private Set<ParcelaBoleto> parcelaBoletos = new HashSet<>();
+	
 	public Fatura() {
 		super();
 	}
 
 	public Fatura(Long fAT_ID, Instant fAT_DATALANCEMENTO, Double fAT_VALORTOTAL, Double fAT_DESCONTO, Double fAT_JUROS,
-			Double fAT_VALORPAGO, Instant fAT_VENCIMENTO, Integer fATA_ATRASO) {
+			Double fAT_VALORPAGO, Instant fAT_VENCIMENTO, Integer fATA_ATRASO, FormaPagamento pagamentos,
+			PagamentoStatus fAT_STS_PAG) {
 		super();
 		FAT_ID = fAT_ID;
 		FAT_DATALANCEMENTO = fAT_DATALANCEMENTO;
@@ -60,6 +80,20 @@ public class Fatura implements Serializable {
 		FAT_VALORPAGO = fAT_VALORPAGO;
 		FAT_VENCIMENTO = fAT_VENCIMENTO;
 		FATA_ATRASO = fATA_ATRASO;
+		this.pagamentos = pagamentos;
+		setFAT_STS_PAG(fAT_STS_PAG);
 	}
+
+	public PagamentoStatus getFAT_STS_PAG() {
+		return PagamentoStatus.valueOf(FAT_STS_PAG);
+	}
+
+	public void setFAT_STS_PAG(PagamentoStatus fAT_STS_PAG) {
+		if(fAT_STS_PAG != null) {
+			this.FAT_STS_PAG = fAT_STS_PAG.getCodigo();
+		}
+	}
+
+	
 	
 }

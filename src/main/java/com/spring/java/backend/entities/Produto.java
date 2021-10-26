@@ -1,11 +1,14 @@
 package com.spring.java.backend.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -17,6 +20,8 @@ public class Produto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	@Getter
+	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long PRO_ID;
@@ -44,6 +49,14 @@ public class Produto implements Serializable{
 	@Getter
 	@Setter
 	private String PRO_FLAG;
+	
+	@Getter
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemVenda> itemVendas = new HashSet<>();
+	
+	@Getter
+	@OneToMany(mappedBy = "id.compra")
+	private Set<ItemCompra> itemCompras = new HashSet<>();
 	
 	public Produto() {
 		super();
