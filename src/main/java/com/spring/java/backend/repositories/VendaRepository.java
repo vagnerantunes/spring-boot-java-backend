@@ -7,5 +7,5 @@ import com.spring.java.backend.entities.Venda;
 
 @Repository
 public interface VendaRepository extends JpaRepository<Venda, Long>{
-
+	
 }
