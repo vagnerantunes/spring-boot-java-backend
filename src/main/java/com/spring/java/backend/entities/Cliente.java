@@ -21,6 +21,9 @@ import lombok.Setter;
 @Table(name = "tb_cliente")
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Getter
+	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long CLI_ID;
@@ -58,8 +61,8 @@ public class Cliente implements Serializable {
 	@Setter
 	private String CLI_FLAG;
 	
-	@Getter
 	@JsonIgnore
+	@Getter	
 	@OneToMany(mappedBy = "clientes")
 	private List<Venda> vendas = new ArrayList<>();
 	

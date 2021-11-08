@@ -12,40 +12,35 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.spring.java.backend.entities.Venda;
-import com.spring.java.backend.services.VendaService;
+
+import com.spring.java.backend.entities.FormaPagamento;
+import com.spring.java.backend.services.FormaPagamentoService;
 
 @RestController
-@RequestMapping(value = "/vendas")
-public class VendaResource {
+@RequestMapping(value = "/fpagamentos")
+public class FormaPagamentoResource {
 
 	@Autowired
-	private VendaService service;
+	private FormaPagamentoService service;
 
 	@GetMapping
-	public ResponseEntity<List<Venda>> findAll() {
-		List<Venda> list = service.findAll();
+	public ResponseEntity<List<FormaPagamento>> findAll() {
+		List<FormaPagamento> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Venda> findById(@PathVariable Long id) {
-		Venda obj = service.findById(id);
+	public ResponseEntity<FormaPagamento> findById(@PathVariable Long id) {
+		FormaPagamento obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 
 	}
-	/*
-	 * @RequestMapping(method = RequestMethod.POST) public ResponseEntity<Void>
-	 * insert(@Validated @RequestBody Venda obj){ obj = service.insert(obj); URI uri
-	 * = ServletUriComponentsBuilder.fromCurrentRequest()
-	 * .path("/{id}").buildAndExpand(obj.getVEN_ID()).toUri(); return
-	 * ResponseEntity.created(uri).build(); }
-	 */
 
 	@PostMapping
-	public ResponseEntity<Venda> insert(@RequestBody Venda obj) {
+	public ResponseEntity<FormaPagamento> insert(@RequestBody FormaPagamento obj) {
 		obj = service.insert(obj);
 		return ResponseEntity.ok().body(obj);
+
 	}
 
 	@DeleteMapping(value = "/{id}")
@@ -55,10 +50,9 @@ public class VendaResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Venda> update(@PathVariable Long id, @RequestBody Venda obj) {
+	public ResponseEntity<FormaPagamento> udpate(@PathVariable Long id, @RequestBody FormaPagamento obj) {
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 		
 	}
-
 }

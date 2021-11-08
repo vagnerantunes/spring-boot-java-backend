@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.java.backend.entities.Cliente;
 import com.spring.java.backend.repositories.ClienteRepository;
@@ -24,7 +25,8 @@ public class ClienteService {
 		return obj.get();
 
 	}
-
+	
+	@Transactional
 	public Cliente insert(Cliente obj) {
 		return repository.save(obj);
 	}
@@ -53,4 +55,5 @@ public class ClienteService {
 		entity.setCLI_SEGMENTO(obj.getCLI_SEGMENTO());
 		entity.setCLI_FLAG(obj.getCLI_FLAG());
 	}
+	
 }

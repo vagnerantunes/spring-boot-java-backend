@@ -129,4 +129,5 @@ public class Venda implements Serializable {
 		this.pagamentos = pagamentos;
 		this.usuarios = usuarios;
 	}	
+	
 }
