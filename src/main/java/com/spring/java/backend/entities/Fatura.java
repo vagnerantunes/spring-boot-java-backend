@@ -50,7 +50,7 @@ public class Fatura implements Serializable {
 	private Instant FAT_VENCIMENTO;
 	@Getter
 	@Setter
-	private Integer FATA_ATRASO;
+	private Integer FAT_ATRASO;
 	
 	@Getter
 	@Setter
@@ -69,7 +69,7 @@ public class Fatura implements Serializable {
 	}
 
 	public Fatura(Long fAT_ID, Instant fAT_DATALANCEMENTO, Double fAT_VALORTOTAL, Double fAT_DESCONTO, Double fAT_JUROS,
-			Double fAT_VALORPAGO, Instant fAT_VENCIMENTO, Integer fATA_ATRASO, FormaPagamento pagamentos,
+			Double fAT_VALORPAGO, Instant fAT_VENCIMENTO, Integer fAT_ATRASO, FormaPagamento pagamentos,
 			PagamentoStatus fAT_STS_PAG) {
 		super();
 		FAT_ID = fAT_ID;
@@ -79,7 +79,7 @@ public class Fatura implements Serializable {
 		FAT_JUROS = fAT_JUROS;
 		FAT_VALORPAGO = fAT_VALORPAGO;
 		FAT_VENCIMENTO = fAT_VENCIMENTO;
-		FATA_ATRASO = fATA_ATRASO;
+		FAT_ATRASO = fAT_ATRASO;
 		this.pagamentos = pagamentos;
 		setFAT_STS_PAG(fAT_STS_PAG);
 	}

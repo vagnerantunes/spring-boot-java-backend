@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +20,9 @@ import lombok.Setter;
 public class Fornecedor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@Getter
+	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long FOR_ID;
@@ -48,6 +52,7 @@ public class Fornecedor implements Serializable {
 	@Setter
 	private String FOR_FLAG;
 	
+	@JsonIgnore
 	@Getter
 	@Setter
 	@OneToMany(mappedBy = "fornecedor")
