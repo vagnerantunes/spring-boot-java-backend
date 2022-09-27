@@ -31,7 +31,7 @@ public class BoletoResource {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Boleto> findById(@PathVariable Long id){
+	public ResponseEntity<Boleto> findById(@PathVariable Integer id){
 		Boleto obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 		
@@ -45,13 +45,13 @@ public class BoletoResource {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Boleto> update(@PathVariable Long id, @RequestBody Boleto obj){
+	public ResponseEntity<Boleto> update(@PathVariable Integer id, @RequestBody Boleto obj){
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}

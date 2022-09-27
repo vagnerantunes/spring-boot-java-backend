@@ -3,9 +3,16 @@ package com.spring.java.backend.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.java.backend.dto.VendaDTO;
+import com.spring.java.backend.dto.VendaNewDTO;
+import com.spring.java.backend.entities.Cliente;
+import com.spring.java.backend.entities.FormaPagamento;
+import com.spring.java.backend.entities.Usuario;
 import com.spring.java.backend.entities.Venda;
 import com.spring.java.backend.repositories.VendaRepository;
 
@@ -15,72 +22,67 @@ public class VendaService {
 	@Autowired
 	private VendaRepository repository;
 
-	@Autowired
-	private ClienteService clienteService;
-
-	@Autowired
-	private UsuarioService usuarioService;
-
-	@Autowired
-	private FormaPagamentoService formaPagamentoService;
-
+	//listar todos
 	public List<Venda> findAll() {
 		return repository.findAll();
 	}
 
-	public Venda findById(Long id) {
+	//listar por id
+	public Venda findById(Integer id) {
 		Optional<Venda> obj = repository.findById(id);
 		return obj.get();
-
 	}
-
-	/*
-	 * Para inserir uma chave estrangeira, verifica se contem na classe entity no
-	 * atributo de vendas, "jasonignore" e getter e setter na classe entity
-	 * estrangeira.
-	 * 
-	 */
-	public Venda insert(Venda obj) {
-		obj.setVEN_ID(null);
-		obj.setClientes(clienteService.findById(obj.getClientes().getCLI_ID()));
-		obj.setUsuarios(usuarioService.findById(obj.getUsuarios().getUSU_ID()));
-		obj.setPagamentos(formaPagamentoService.findById(obj.getPagamentos().getFPG_ID()));
-		obj = repository.save(obj);
-		return obj;
+	
+	public Venda insert (VendaNewDTO vendaNewDTO) {
+		Venda venda = fromDTO(vendaNewDTO);
+		repository.save(venda);
+		return venda;
 	}
-
-	/*
-	 * este metodo foi substituido pois estava dando inconsistencia... ao inves de
-	 * salvar o id informado da chave estrageira, gera em ordem.. ex.: 1,2,3...
-	 * 
-	 * @Transactional public Venda insert(Venda obj) { obj.setVEN_ID(null);
-	 * clienteRepository.save(obj.getClientes()); obj = repository.save(obj); return
-	 * obj; }
-	 */
-
-	public void delete(Long id) {
+	
+	
+	public void delete(Integer id) {
+		Optional<Venda> opt = repository.findById(id);
+		
+		opt.orElseThrow(() -> new EntityNotFoundException("Funcionario não encontrado!, ID: " + id));
+		
 		repository.deleteById(id);
 	}
-
-	@SuppressWarnings("deprecation")
-	public Venda update(Long id, Venda obj) {
-		Venda entity = repository.getOne(id);
-		updateData(entity, obj);
-		return repository.save(entity);
-	}
-
-	private void updateData(Venda entity, Venda obj) {
-		entity.setVEN_DATA(obj.getVEN_DATA());
-		entity.setVEN_DESCONTO(obj.getVEN_DESCONTO());
-		entity.setVEN_JUROS(obj.getVEN_JUROS());
-		entity.setVEN_STS_ORC(obj.getVEN_STS_ORC());
-		entity.setVEN_STS_PAG(obj.getVEN_STS_PAG());
-		entity.setVEN_VRPAGO(obj.getVEN_VRPAGO());
-		entity.setVEN_VRTOTAL(obj.getVEN_VRTOTAL());	
-		entity.setClientes(obj.getClientes());
-		entity.setPagamentos(obj.getPagamentos());
-		entity.setUsuarios(obj.getUsuarios());
+	
+	
+	public void update (Integer id, VendaDTO vendaDTO) {
+		Venda venda = fromDTO(vendaDTO);
+		Optional<Venda> opt = repository.findById(id);
 		
+		opt.orElseThrow(() -> new EntityNotFoundException("Funcionario não encontrado!, ID: " + id));
+		
+		venda.setVenId(id);
+		repository.save(venda);
 	}
-
+	
+	//utilitarios
+	public Venda fromDTO(VendaNewDTO venNewDTO) {
+		Cliente cliente = new Cliente(venNewDTO.getVenCliente(), null, null, null, null, null, null, null, null,
+				null, null, null);
+		FormaPagamento formaPagamento = new FormaPagamento(venNewDTO.getVenFormaPagamento(), null, null, null, null, 
+				null, null);
+		Usuario usuario = new Usuario(venNewDTO.getVenUsuario(), null, null, null);
+		Venda venda = new Venda(null, venNewDTO.getVenData(), venNewDTO.getVenVrtotal(), venNewDTO.getVenVrpago(), 
+				venNewDTO.getVenDesconto(), venNewDTO.getVenJuros(), venNewDTO.getVEN_STS_ORC(), 
+				venNewDTO.getVEN_STS_PAG(), cliente, formaPagamento, usuario);
+		
+		return venda;
+	}
+	
+	public Venda fromDTO(VendaDTO venDTO) {
+		Cliente cliente = new Cliente(venDTO.getVenCliente(), null, null, null, null, null, null, null, null,
+				null, null, null);
+		FormaPagamento formaPagamento = new FormaPagamento(venDTO.getVenFormaPagamento(), null, null, null, null, 
+				null, null);
+		Usuario usuario = new Usuario(venDTO.getVenUsuario(), null, null, null);
+		Venda venda = new Venda(null, venDTO.getVenData(), venDTO.getVenVrtotal(), venDTO.getVenVrpago(), 
+				venDTO.getVenDesconto(), venDTO.getVenJuros(), venDTO.getVEN_STS_ORC(), 
+				venDTO.getVEN_STS_PAG(), cliente, formaPagamento, usuario);
+		
+		return venda;
+	}
 }

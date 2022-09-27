@@ -1,78 +1,58 @@
 package com.spring.java.backend.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_fornecedor")
 public class Fornecedor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Getter
-	@Setter
 	@Id
+	@Column(length = 11, name = "FOR_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long FOR_ID;
+	private Integer forId;
 
-	@Getter
-	@Setter
-	private String FOR_NOME;
-	@Getter
-	@Setter
-	private String FOR_TIPO;
-	@Getter
-	@Setter
-	private String FOR_CPF_CNPJ;
-	@Getter
-	@Setter
-	private String FOR_FANTASIA;
-	@Getter
-	@Setter
-	private String FOR_ENDERECO;
-	@Getter
-	@Setter
-	private String FOR_CONTATO;
-	@Getter
-	@Setter
-	private String FOR_EMAIL;
-	@Getter
-	@Setter
-	private String FOR_FLAG;
+	@Column(length = 45,name = "FOR_NOME")
+	private String forNome;
 	
-	@JsonIgnore
-	@Getter
-	@Setter
-	@OneToMany(mappedBy = "fornecedor")
-	private List<Compra> compras;
-
-	public Fornecedor() {
-		super();
-	}
-
-	public Fornecedor(Long fOR_ID, String fOR_NOME, String fOR_TIPO, String fOR_CPF_CNPJ, String fOR_FANTASIA,
-			String fOR_ENDERECO, String fOR_CONTATO, String fOR_EMAIL, String fOR_FLAG) {
-		super();
-		FOR_ID = fOR_ID;
-		FOR_NOME = fOR_NOME;
-		FOR_TIPO = fOR_TIPO;
-		FOR_CPF_CNPJ = fOR_CPF_CNPJ;
-		FOR_FANTASIA = fOR_FANTASIA;
-		FOR_ENDERECO = fOR_ENDERECO;
-		FOR_CONTATO = fOR_CONTATO;
-		FOR_EMAIL = fOR_EMAIL;
-		FOR_FLAG = fOR_FLAG;
-	}	
+	@Column(length = 2, name = "FOR_TIPO")
+	private String forTipo;
+	
+	@Column(length = 14, name = "FOR_CPF_CNPJ")
+	private String forCpfCnpj;
+	
+	@Column(length = 45, name = "FOR_FANTASIA")
+	private String forFantasia;
+	
+	@Column(length = 45, name = "FOR_ENDERECO")
+	private String forEndereco;
+	
+	@Column(length = 14, name = "FOR_CONTATO")
+	private String forContato;
+	
+	@Column(length = 45, name = "FOR_EMAIL")
+	private String forEmail;
+	
+	@Column(length = 2, name = "FOR_FLAG")
+	private String forFlag;
+	
 }

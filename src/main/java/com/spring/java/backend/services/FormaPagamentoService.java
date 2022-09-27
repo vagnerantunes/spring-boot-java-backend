@@ -19,34 +19,32 @@ public class FormaPagamentoService {
 		return repository.findAll();
 	}
 
-	public FormaPagamento findById(Long id) {
+	public FormaPagamento findById(Integer id) {
 		Optional<FormaPagamento> obj = repository.findById(id);
 		return obj.get();
 	}
 
 	public FormaPagamento insert(FormaPagamento obj) {
 		return repository.save(obj);
-
 	}
 
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 
 	@SuppressWarnings("deprecation")
-	public FormaPagamento update(Long id, FormaPagamento obj) {
+	public FormaPagamento update(Integer id, FormaPagamento obj) {
 		FormaPagamento entity = repository.getOne(id);
 		updateData(entity, obj);
 		return repository.save(entity);
 	}
 
 	private void updateData(FormaPagamento entity, FormaPagamento obj) {
-		entity.setFPG_DESCRICAO(obj.getFPG_DESCRICAO());
-		entity.setFPG_FLAG(obj.getFPG_FLAG());
-		entity.setFPG_PORCENTAGEM(obj.getFPG_PORCENTAGEM());
-		entity.setFPG_QTDPARCELA(obj.getFPG_QTDPARCELA());
-		entity.setFPG_TIPO(obj.getFPG_TIPO());
-		entity.setFPG_TIPO_CONTA(obj.getFPG_TIPO_CONTA());
+		entity.setFpgDescricao(obj.getFpgDescricao());
+		entity.setFpgFlag(obj.getFpgFlag());
+		entity.setFpgPorcentagem(obj.getFpgPorcentagem());
+		entity.setFpgQtdParcela(obj.getFpgQtdParcela());
+		entity.setFpgTipo(obj.getFpgTipo());
+		entity.setFpgTipoConta(obj.getFpgTipoConta());
 	}
-
 }

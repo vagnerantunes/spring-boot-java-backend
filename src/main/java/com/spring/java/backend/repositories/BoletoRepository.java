@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.spring.java.backend.entities.Boleto;
 
 @Repository
-public interface BoletoRepository extends JpaRepository<Boleto, Long> {
+public interface BoletoRepository extends JpaRepository<Boleto, Integer> {
 
 }

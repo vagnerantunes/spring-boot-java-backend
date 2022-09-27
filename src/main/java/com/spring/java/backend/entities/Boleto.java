@@ -2,21 +2,25 @@ package com.spring.java.backend.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_boleto")
 public class Boleto implements Serializable{
@@ -25,47 +29,19 @@ public class Boleto implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long BOL_ID;
-	@Getter
-	@Setter
-	private String BOL_DESCRICAO;
-	@Getter
-	@Setter
-	private Instant BOL_DATA;
-	@Getter
-	@Setter
-	private Double BOL_VALOR;
-	@Getter
-	@Setter
-	private Integer BOL_QTDPARCELAS;
-	@Getter
-	@Setter
-	private String BOL_CONTAPFPJ;
-	@Getter
-	@Setter
-	private String BOL_OBS;
-	
-	@Getter
-	@JsonIgnore
-	@OneToMany(mappedBy = "id.boleto")
-	private Set<ParcelaBoleto> parcelaBoletos = new HashSet<>();
-	
-	public Boleto() {
-		super();
-	}
-
-	public Boleto(Long bOL_ID, String bOL_DESCRICAO, Instant bOL_DATA, Double bOL_VALOR, Integer bOL_QTDPARCELAS,
-			String bOL_CONTAPFPJ, String bOL_OBS) {
-		super();
-		BOL_ID = bOL_ID;
-		BOL_DESCRICAO = bOL_DESCRICAO;
-		BOL_DATA = bOL_DATA;
-		BOL_VALOR = bOL_VALOR;
-		BOL_QTDPARCELAS = bOL_QTDPARCELAS;
-		BOL_CONTAPFPJ = bOL_CONTAPFPJ;
-		BOL_OBS = bOL_OBS;
-	}			
-
-	
+	@Column(length = 11, name = "BOL_ID")
+	private Integer bolId;
+	@Column(length = 45, name = "BOL_DESCRICAO")
+	private String bolDescricao;
+	@Column(name = "BOL_DATA")
+	private Instant bolData;
+	@Column(name = "BOL_VALOR")
+	private Double bolValor;
+	@Column(name = "BOL_QTD_PARCELAS")
+	private Integer bolQtdParcelas;
+	@Column(length = 14, name = "BOL_CONTA_PFPJ")
+	private String bolContaPFPJ;
+	@Column(length = 45, name = "BOL_OBS")
+	private String bolObs;
 	
 }

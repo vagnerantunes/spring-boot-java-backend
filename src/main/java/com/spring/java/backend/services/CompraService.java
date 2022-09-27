@@ -22,36 +22,36 @@ public class CompraService {
 		return repository.findAll();
 	}
 
-	public Compra findById(Long id) {
+	public Compra findById(Integer id) {
 		Optional<Compra> obj = repository.findById(id);
 		return obj.get();
 	}
 
 	public Compra insert(Compra obj) {
-		obj.setCOM_ID(null);
-		obj.setFornecedor(fornecedorService.findById(obj.getFornecedor().getFOR_ID()));
+		obj.setComId(null);
+		obj.setComFornecedor(fornecedorService.findById(obj.getComFornecedor().getForId()));
 		obj = repository.save(obj);
 		return obj;
-
 	}
 
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 
 	@SuppressWarnings("deprecation")
-	public Compra update(Long id, Compra obj) {
+	public Compra update(Integer id, Compra obj) {
 		Compra entity = repository.getOne(id);
 		updateData(entity, obj);
 		return repository.save(entity);
 	}
 
 	private void updateData(Compra entity, Compra obj) {
-		entity.setCOM_DATA(obj.getCOM_DATA());
-		entity.setCOM_DESCONTO(obj.getCOM_DESCONTO());
-		entity.setCOM_JUROS(obj.getCOM_JUROS());
+		entity.setComData(obj.getComData());
+		entity.setComDesconto(obj.getComDesconto());
+		entity.setComJuros(obj.getComJuros());
 		entity.setCOM_STS_DOC(obj.getCOM_STS_DOC());
-		entity.setCOM_VALORTOTAL(obj.getCOM_VALORTOTAL());
-		entity.setFornecedor(obj.getFornecedor());
+		entity.setComValorTotal(obj.getComValorTotal());
+		entity.setComFornecedor(obj.getComFornecedor());
+		
 	}
 }

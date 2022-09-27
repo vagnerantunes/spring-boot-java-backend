@@ -19,7 +19,7 @@ public class BoletoService {
 		return repository.findAll();
 	}
 
-	public Boleto findById(Long id) {
+	public Boleto findById(Integer id) {
 		Optional<Boleto> obj = repository.findById(id);
 		return obj.get();
 
@@ -29,23 +29,23 @@ public class BoletoService {
 		return repository.save(obj);
 	}
 
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 
 	@SuppressWarnings("deprecation")
-	public Boleto update(Long id, Boleto obj) {
+	public Boleto update(Integer id, Boleto obj) {
 		Boleto entity = repository.getOne(id);
 		updateData(entity, obj);
 		return repository.save(entity);
 	}
 
 	private void updateData(Boleto entity, Boleto obj) {
-		entity.setBOL_CONTAPFPJ(obj.getBOL_CONTAPFPJ());
-		entity.setBOL_DATA(obj.getBOL_DATA());
-		entity.setBOL_DESCRICAO(obj.getBOL_DESCRICAO());
-		entity.setBOL_OBS(obj.getBOL_OBS());
-		entity.setBOL_QTDPARCELAS(obj.getBOL_QTDPARCELAS());
-		entity.setBOL_VALOR(obj.getBOL_VALOR());
+		entity.setBolContaPFPJ(obj.getBolContaPFPJ());
+		entity.setBolData(obj.getBolData());
+		entity.setBolDescricao(obj.getBolDescricao());
+		entity.setBolObs(obj.getBolObs());
+		entity.setBolQtdParcelas(obj.getBolQtdParcelas());
+		entity.setBolValor(obj.getBolValor());
 	}
 }

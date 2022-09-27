@@ -31,13 +31,13 @@ public class FaturaResource {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Fatura> findById(@PathVariable Long id){
+	public ResponseEntity<Fatura> findById(@PathVariable Integer id){
 		Fatura obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);		
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 		
@@ -46,15 +46,13 @@ public class FaturaResource {
 	@PostMapping
 	public ResponseEntity<Fatura> insert(@RequestBody Fatura obj){
 		obj = service.insert(obj);
-		return ResponseEntity.ok().body(obj);
-		
+		return ResponseEntity.ok().body(obj);		
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Fatura> update(@PathVariable Long id, @RequestBody Fatura obj){
+	public ResponseEntity<Fatura> update(@PathVariable Integer id, @RequestBody Fatura obj){
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);	
-		
 	}
 	
 }

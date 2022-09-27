@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.java.backend.entities.Usuario;
 import com.spring.java.backend.services.UsuarioService;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/usuarios")
 public class UsuarioResource {
@@ -30,7 +32,7 @@ public class UsuarioResource {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Usuario> findById(@PathVariable Long id) {
+	public ResponseEntity<Usuario> findById(@PathVariable Integer id) {
 		Usuario obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
@@ -42,14 +44,15 @@ public class UsuarioResource {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario obj){
+	public ResponseEntity<Usuario> update(@PathVariable Integer id, @RequestBody Usuario obj){
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}	
+	
 }

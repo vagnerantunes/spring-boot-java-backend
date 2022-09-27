@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.spring.java.backend.entities.Fatura;
 
 @Repository
-public interface FaturaRepository extends JpaRepository<Fatura, Long> {
+public interface FaturaRepository extends JpaRepository<Fatura, Integer> {
 
 }

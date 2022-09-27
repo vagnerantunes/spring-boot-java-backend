@@ -21,39 +21,39 @@ public class FaturaService {
 		return repository.findAll();
 	}
 
-	public Fatura findById(Long id) {
+	public Fatura findById(Integer id) {
 		Optional<Fatura> obj = repository.findById(id);
 		return obj.get();
 	}
 
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 
 	}
 
 	public Fatura insert(Fatura obj) {
-		obj.setFAT_ID(null);
-		obj.setPagamentos(formaPagamentoService.findById(obj.getPagamentos().getFPG_ID()));
+		obj.setFatId(null);
+		obj.setFatPagamento(formaPagamentoService.findById(obj.getFatPagamento().getFpgId()));
 		obj = repository.save(obj);
 		return obj;
 	}
 
 	@SuppressWarnings("deprecation")
-	public Fatura update(Long id, Fatura obj) {
+	public Fatura update(Integer id, Fatura obj) {
 		Fatura entity = repository.getOne(id);
 		updateData(entity, obj);
 		return repository.save(entity);
 	}
 
 	private void updateData(Fatura entity, Fatura obj) {
-		entity.setFAT_DATALANCEMENTO(obj.getFAT_DATALANCEMENTO());
-		entity.setFAT_DESCONTO(obj.getFAT_DESCONTO());
-		entity.setFAT_JUROS(obj.getFAT_JUROS());
+		entity.setFatDataLancamento(obj.getFatDataLancamento());
+		entity.setFatDesconto(obj.getFatDesconto());
+		entity.setFatJuros(obj.getFatJuros());
 		entity.setFAT_STS_PAG(obj.getFAT_STS_PAG());
-		entity.setFAT_VALORPAGO(obj.getFAT_VALORPAGO());
-		entity.setFAT_VALORTOTAL(obj.getFAT_VALORTOTAL());
-		entity.setFAT_VENCIMENTO(obj.getFAT_VENCIMENTO());
-		entity.setFAT_ATRASO(obj.getFAT_ATRASO());
-		entity.setPagamentos(obj.getPagamentos());
+		entity.setFatValorPago(obj.getFatValorPago());
+		entity.setFatValorTotal(obj.getFatValorTotal());
+		entity.setFatVencimento(obj.getFatVencimento());
+		entity.setFatAtraso(obj.getFatAtraso());
+		entity.setFatPagamento(obj.getFatPagamento());
 	}
 }

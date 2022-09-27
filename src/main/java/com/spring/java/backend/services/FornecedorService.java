@@ -20,7 +20,7 @@ public class FornecedorService {
 		
 	}
 	
-	public Fornecedor findById(Long id) {
+	public Fornecedor findById(Integer id) {
 		Optional<Fornecedor> obj = repository.findById(id);
 		return obj.get();
 		
@@ -31,26 +31,25 @@ public class FornecedorService {
 		
 	}
 	
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 	
 	@SuppressWarnings("deprecation")
-	public Fornecedor update(Long id, Fornecedor obj) {
+	public Fornecedor update(Integer id, Fornecedor obj) {
 		Fornecedor entity = repository.getOne(id);
 		updateData(entity, obj);
 		return repository.save(entity);
-		
 	}
 
 	private void updateData(Fornecedor entity, Fornecedor obj) {
-		entity.setFOR_CONTATO(obj.getFOR_CONTATO());
-		entity.setFOR_EMAIL(obj.getFOR_EMAIL());
-		entity.setFOR_ENDERECO(obj.getFOR_ENDERECO());
-		entity.setFOR_FANTASIA(obj.getFOR_FANTASIA());
-		entity.setFOR_FLAG(obj.getFOR_FLAG());
-		entity.setFOR_NOME(obj.getFOR_NOME());
-		entity.setFOR_TIPO(obj.getFOR_TIPO());
+		entity.setForContato(obj.getForContato());
+		entity.setForEmail(obj.getForEmail());
+		entity.setForEndereco(obj.getForEndereco());
+		entity.setForFantasia(obj.getForFantasia());
+		entity.setForFlag(obj.getForFlag());
+		entity.setForNome(obj.getForNome());
+		entity.setForTipo(obj.getForTipo());
 	}	
 	
 }

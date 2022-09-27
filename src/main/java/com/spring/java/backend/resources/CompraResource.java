@@ -30,7 +30,7 @@ public class CompraResource {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Compra> findById(@PathVariable Long id){
+	public ResponseEntity<Compra> findById(@PathVariable Integer id){
 		Compra obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 		
@@ -44,14 +44,14 @@ public class CompraResource {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 		
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Compra> update(@PathVariable Long id, @RequestBody Compra obj){
+	public ResponseEntity<Compra> update(@PathVariable Integer id, @RequestBody Compra obj){
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 		

@@ -2,17 +2,13 @@ package com.spring.java.backend.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.java.backend.enums.PagamentoStatus;
 
 import lombok.Getter;
@@ -51,12 +47,12 @@ public class Parcela implements Serializable {
 	private Integer PVD_ATRASO;
 
 	private Integer PVD_STS_SITU;
-
+/*
 	@Getter
 	@JsonIgnore
 	@ManyToMany(mappedBy = "parcelas")
 	private Set<Venda> pedidos = new HashSet<>();
-
+*/
 	public Parcela() {
 		super();
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.java.backend.entities.FormaPagamento;
 import com.spring.java.backend.services.FormaPagamentoService;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/fpagamentos")
 public class FormaPagamentoResource {
@@ -30,7 +32,7 @@ public class FormaPagamentoResource {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<FormaPagamento> findById(@PathVariable Long id) {
+	public ResponseEntity<FormaPagamento> findById(@PathVariable Integer id) {
 		FormaPagamento obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 
@@ -44,15 +46,15 @@ public class FormaPagamentoResource {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<FormaPagamento> udpate(@PathVariable Long id, @RequestBody FormaPagamento obj) {
+	public ResponseEntity<FormaPagamento> udpate(@PathVariable Integer id, @RequestBody FormaPagamento obj) {
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
-		
 	}
+	
 }
